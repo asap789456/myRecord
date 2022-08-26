@@ -23,7 +23,7 @@
 </body>
 
 ```
-# 사용할 버튼들을 설정합니다.
+### 사용할 버튼들을 설정합니다.
 ```javascript
 <script>
   (function () {
