@@ -4,14 +4,16 @@
 - 개발환경
   - 언어
     - JavaScript, Java
+  - 개발도구
+    - Eclipse
+  - Tomcat 8.5  
+
+
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/28374739/186798409-8284cc9b-05db-40a7-909b-4ebb14d47469.gif)
 
-> This is a first blockqute.
->	> This is a second blockqute.
->	>	> This is a third blockqute.
-
-##### 에디터를 사용하기 위해 id가 edit인 textarea 태그를 입력합니다.
+> ## 에디터 화면
+##### 에디터를 사용하기 위해 #edit인 textarea 태그를 입력합니다.
 ```javascript
 // 에디터 선언
 <body>
@@ -45,3 +47,9 @@
 </script>
 ```
 
+##### 이미지 업로드와 파일 업로드 Ajax Url 을 설정합니다.  
+
+
+
+> ## 파일 업로드 처리
+>> https://froala.com/wysiwyg-editor/docs/server/java/file-upload/ 참고
