@@ -107,3 +107,33 @@ public class FileServlet extends HttpServlet {
 ```java
 response.setContentType("application/download;UTF-8");
 ```
+
+
+
+
+
+
+
+
+
+# Api Store 를 이용한 카카오 알림톡 발송
+
+- 개발환경
+  - 언어
+    - JavaScript, Java
+  - 개발도구
+    - Eclipse
+  - Tomcat 8.5
+  - JDK 1.8
+
+
+
+> ## Api Store
+##### 알림톡 템플릿을 신규 등록 또는 관리할 수 있습니다.
+![image](https://user-images.githubusercontent.com/28374739/186803835-f5cc2c0a-4ef7-47cf-b48e-47693757ed0c.png)
+
+
+##### 템플릿 내용을 설정하고 등록합니다.
+![image](https://user-images.githubusercontent.com/28374739/186803935-c32d1712-85ce-4801-beb8-cad97087fd92.png)
+
+
