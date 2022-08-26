@@ -86,7 +86,20 @@ public class FileUpload extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-			
-			}
+			throws ServletException, IOException {}
+```
+##### 업로드를 허용할 확장자를 설정합니다.
+```java
+String[] allowedExts = new String[] { "txt", "html", "pdf", "doc", ".octet-stream" };
+```
+
+##### 파일 다운로드 시 실행되는 url입니다.
+```java
+@WebServlet("/files/*")
+public class FileServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) {}
 ```
