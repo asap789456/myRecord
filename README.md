@@ -13,7 +13,7 @@
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/28374739/186798409-8284cc9b-05db-40a7-909b-4ebb14d47469.gif)
 
 > ## 1. 에디터 화면
-##### 에디터를 사용하기 위해 #edit인 textarea 태그를 입력합니다.
+#### 에디터를 사용하기 위해 #edit인 textarea 태그를 입력합니다.
 ```javascript
 // 에디터 선언
 <body>
@@ -24,7 +24,7 @@
 </body>
 
 ```
-##### 버튼들을 설정합니다.
+#### 버튼들을 설정합니다.
 ```javascript
 <script>
   (function () {
@@ -47,7 +47,7 @@
 </script>
 ```
 
-##### 파일을 업로드할 때  Ajax Url 을 설정합니다.
+#### 파일을 업로드할 때  Ajax Url 을 설정합니다.
 > 이미지
 ```javascript
 fileUploadURL: '/upload_file',
@@ -69,7 +69,7 @@ fileUploadParams: {
 
 > ## 2. 파일 업로드 처리
 >> https://froala.com/wysiwyg-editor/docs/server/java/file-upload/ 참고
-##### 파일 업로드 시 실행되는 url입니다.
+#### 파일 업로드 시 실행되는 url입니다.
 ```java
 @WebServlet(name = "FileUploadServlet", urlPatterns = { "/upload_file" })
 @MultipartConfig
@@ -90,12 +90,12 @@ public class FileUpload extends HttpServlet {
 			...
 			}
 ```
-##### 업로드를 허용할 확장자를 설정합니다.
+#### 업로드를 허용할 확장자를 설정합니다.
 ```java
 String[] allowedExts = new String[] { "txt", "html", "pdf", "doc", ".octet-stream" };
 ```
 
-##### 업로드 된 파일을 보여주는 url입니다.
+#### 업로드 된 파일을 보여주는 url입니다.
 ```java
 @WebServlet("/files/*")
 public class FileServlet extends HttpServlet {
@@ -107,7 +107,7 @@ public class FileServlet extends HttpServlet {
 	...
 	}
 ```
-##### 파일을 다운로드 형태로 보기 위해 ContentType을 설정합니다.
+#### 파일을 다운로드 형태로 보기 위해 ContentType을 설정합니다.
 ```java
 response.setContentType("application/download;UTF-8");
 ```
@@ -133,16 +133,16 @@ response.setContentType("application/download;UTF-8");
 
 
 > ## 1. Api Store
-##### 알림톡 템플릿을 신규 등록 & 관리할 수 있습니다.
+#### 알림톡 템플릿을 신규 등록 & 관리할 수 있습니다.
 ![image](https://user-images.githubusercontent.com/28374739/186803835-f5cc2c0a-4ef7-47cf-b48e-47693757ed0c.png)
 
 
-##### 템플릿 내용을 설정하고 등록합니다.
+#### 템플릿 내용을 설정하고 등록합니다.
 ![image](https://user-images.githubusercontent.com/28374739/186803935-c32d1712-85ce-4801-beb8-cad97087fd92.png)
 
 
 > ## 2. 알림톡 발송 처리
-##### 알림톡 발신번호 등록 & 인증을 합니다.
+#### 알림톡 발신번호 등록 & 인증을 합니다.
 ```java
 // http://localhost:8080/kkotel/발신번호/인증방법/
 @RequestMapping(value = "/kkotel/{tel}/{type}/{pincode}", method = RequestMethod.GET)
@@ -154,7 +154,7 @@ public void tel(@PathVariable("tel") String tel, @PathVariable("type") String ty
 ```
 
 
-##### 알림톡을 발송합니다.
+#### 알림톡을 발송합니다.
 ```java
 // http://localhost:8080/kkomsg/mycsnm/name/name/odno/csnm/dam_nm/phoneNumber
 @RequestMapping(value = "/kkomsg/{mycsnm}/{name}/{msg}/{odno}/{csnm}/{dam_nm}/{phoneNumber}", method = RequestMethod.GET)
@@ -166,7 +166,7 @@ public void response(@PathVariable("mycsnm") String mycsnm, @PathVariable("name"
 	...
 }
 ```
-##### 알림톡 발송 후 처리결과에 따른 처리코드가 리턴됩니다.
+#### 알림톡 발송 후 처리결과에 따른 처리코드가 리턴됩니다.
 ```java
 JSONParser jsonParse = new JSONParser();
 JSONObject obj = (JSONObject) jsonParse.parse(response.getBody().toString());
@@ -215,7 +215,7 @@ if (result_code.equals("100")) {
   - JDK 1.8
 
 > ## 1. 자바
-##### 매일 8시 50분마다 데이터를 가져올 수 있도록 스케줄링을 설정합니다. 
+#### 매일 8시 50분마다 데이터를 가져올 수 있도록 스케줄링을 설정합니다. 
 ```java
 @Scheduled(cron = "0 50 08 * * *") // 매일 8시 50분
 public void startCurrencyRate() throws IOException {
@@ -227,10 +227,10 @@ public void startCurrencyRate() throws IOException {
 	}
 }
 ```
-##### https://finance.naver.com/marketindex/ url을 사용합니다.
-> Jsoup 을 사용해서 해당 url 을 연결합니다.
-> html 코드 중에 class 명이 'tbl_exchange today' 인 table 태그를 찾아 조회합니다.
-> table 안에 tr 태그의 개수만큼 for문을 실행합니다.
+#### https://finance.naver.com/marketindex/ url을 사용합니다.
+##### 1. Jsoup 을 사용해서 해당 url 을 연결합니다.
+##### 2. html 코드 중에 class 명이 'tbl_exchange today' 인 table 태그를 찾아 조회합니다.
+##### 3. table 안에 tr 태그의 개수만큼 for문을 실행합니다.
 ```java
 public String getCurrencyRate(String cc, String cn, String usdRate) { // cc : 나라코드, cn : 나라명, usdRate : 미국환율
 	try {
@@ -246,10 +246,10 @@ public String getCurrencyRate(String cc, String cn, String usdRate) { // cc : �
 }
 ```
 
-
+#### 데이터를 오브젝트에 담아서 DB에 저장합니다.
 ```java
+service2.insertExRate(exVO2)
 ```
-
 ![image](https://user-images.githubusercontent.com/28374739/186806409-c3a0a8c4-47ab-4841-9cb1-d1b3f1689761.png)
 
 
