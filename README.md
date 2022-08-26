@@ -48,7 +48,7 @@
 ```
 
 ##### 파일을 첨부할 때  Ajax Url 을 설정합니다.
-> 파일
+> 이미지
 ```javascript
 fileUploadURL: '/upload_file',
 fileUploadParams: {
@@ -56,7 +56,7 @@ fileUploadParams: {
 	변수:'${변수}'
 }
 ```
-> 이미지
+> 파일
 ```javascript
 fileUploadURL: '/upload_image',
 fileUploadParams: {
@@ -64,6 +64,8 @@ fileUploadParams: {
 	변수:'${변수}'
 }
 ```
+
+## 링크
 
 
 
