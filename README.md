@@ -13,7 +13,7 @@
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/28374739/186798409-8284cc9b-05db-40a7-909b-4ebb14d47469.gif)
 
 > ## 1. 에디터 화면
-#### 에디터를 사용하기 위해 #edit인 textarea 태그를 입력합니다.
+#### 에디터를 사용하기 위해 #edit인 textarea 태그를 선언합니다.
 ```javascript
 // 에디터 선언
 <body>
@@ -297,5 +297,146 @@ def f_dbConnect(sData, i):
 
 #### 저장된 데이터를 확인할 수 있습니다.
 ![image](https://user-images.githubusercontent.com/28374739/186810948-725de47a-c1b1-446e-88ae-e7ebfc510109.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 아임포트를 이용한 결제 시스템
+
+- 개발환경
+  - 언어
+    - JavaScript, Java
+  - 개발도구
+    - Eclipse
+  - Tomcat 8.5
+  - JDK 1.8
+
+![image](https://user-images.githubusercontent.com/28374739/186850532-662f1bc0-1c2c-4709-b81e-df8f85c3bf76.png)
+
+
+> ## 1. 에디터 화면
+#### 결제모듈을 사용하기 위해 IMP를 선언합니다.
+##### 1. request_pay 안에 결제정보를 입력합니다.
+##### 2. 결제가 성공했을 때 ./payments/complete Ajax 가 실행됩니다.
+##### 3. 결제가 실패했을 때 ./payments/fail Ajax 가 실행됩니다.
+```javascript
+var IMP = window.IMP; // 생략 가능
+IMP.init("가맹점식별코드");//아임포트 관리자 콘솔에서 확인한 가맹점 식별코드 입력
+
+IMP.request_pay({
+	pg : 'PG사 코드값',	//값 형식: [PG사 코드값] 또는 [PG사 코드값].[PG사 상점아이디]
+	pay_method : 'card',
+	merchant_uid: 'merchant_' + new Date().getTime(), //가맹점에서 생성/관리하는 고유 주문번호
+	name : '상품1',//결제창에서 보여질 이름
+	amount : 100,//결제가격(신용카드의 최소 주문금액은 500원, 500원 미만 금액이면 오류로 결제실패)
+	buyer_email : 'test@naver.com',
+	buyer_name : '사용자1',
+	buyer_tel : '010-1234-5678',
+	buyer_addr : '서울특별시 강남구 삼성동',
+	buyer_postcode : '123-456'
+}, function(rsp) {
+	if (rsp.success) {
+		//결제 성공 시 로직
+		$.ajax({
+			url:"./payments/complete",
+			method: "post",
+			data: {
+				imp_uid: rsp.imp_uid,
+				merchant_uid: rsp.merchant_uid
+			},
+			dataType: "json"
+		}).done(function (data) {
+			alert(data.msg);
+		});
+	} else {
+		//결제 실패 시 로직
+		$.ajax({
+			url:"./payments/fail",
+			method: "post",
+			data: {
+				imp_uid: rsp.imp_uid,
+				merchant_uid: rsp.merchant_uid
+			},
+			dataType: "json"
+		}).complete(function () {
+			alert("결제에 실패하셨습니다. " + rsp.error_msg);
+		});				
+	}
+});
+```
+
+> ## 2. 결제 처리
+#### 결제 정보를 조회하기 위해서 access token 을 발급받아야 합니다.
+##### 1. https://api.iamport.kr/users/getToken 을 POST 방식으로 접근하여 access_token을 발급받습니다.
+```java
+@ResponseBody
+public String getToken() throws UnsupportedEncodingException {
+	String ApiUrl = "https://api.iamport.kr/users/getToken";
+	String imp_key = URLEncoder.encode(api_key, "UTF-8");
+	String imp_secret = URLEncoder.encode(api_secret, "UTF-8");
+	String _token = "";// 토큰저장
+
+	HashMap<Object, Object> hash = new HashMap<Object, Object>();
+	hash.put("imp_key", imp_key);
+	hash.put("imp_secret", imp_secret);
+
+	JSONObject json = new JSONObject(hash);
+
+	try {
+		String requestString = "";
+		URL url = new URL(ApiUrl);
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+		connection.setDoOutput(true);
+		connection.setInstanceFollowRedirects(false);
+		connection.setRequestMethod("POST");
+		connection.setRequestProperty("Content-Type", "application/json");
+
+		OutputStream os = connection.getOutputStream();
+		os.write(json.toString().getBytes());
+		connection.connect();
+
+		StringBuilder sb = new StringBuilder();
+
+		if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+			BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
+			String line = null;
+
+			while ((line = br.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+
+			br.close();
+			requestString = sb.toString();
+		}
+		os.flush();
+		connection.disconnect();
+
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObj = (JSONObject) jsonParser.parse(requestString);
+		if ((Long) jsonObj.get("code") == 0) {
+			JSONObject result = (JSONObject) jsonObj.get("response");
+			//System.out.println("토큰생성 ==>> " + result.get("access_token"));
+			_token = (String) result.get("access_token");
+		}
+
+	} catch (Exception e) {
+		e.printStackTrace();
+		_token = "";
+	}
+	return _token;
+}
+```
 
 
