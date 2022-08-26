@@ -103,7 +103,7 @@ public class FileServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {}
 ```
-##### 파일을 다운로드 형태로 보기 위해 ontentType을 설정합니다.
+##### 파일을 다운로드 형태로 보기 위해 ContentType을 설정합니다.
 ```java
 response.setContentType("application/download;UTF-8");
 ```
