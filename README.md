@@ -1,12 +1,11 @@
 # Froala Editor 개발과정
 
 
-- 목록1
-  - 목록 1-1
-    - 목록 1-1-1
+- 개발환경
+  - 언어
+    - JavaScript, Java
 
-
-![image](https://user-images.githubusercontent.com/28374739/186792448-c1c177ae-9223-4649-b388-00371cbcc906.png)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/28374739/186798409-8284cc9b-05db-40a7-909b-4ebb14d47469.gif)
 
 > This is a first blockqute.
 >	> This is a second blockqute.
