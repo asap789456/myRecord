@@ -1,4 +1,4 @@
-# Froala Editor 개발과정
+# Froala Editor
 
 
 - 개발환경
@@ -47,7 +47,7 @@
 </script>
 ```
 
-##### 파일을 첨부할 때  Ajax Url 을 설정합니다.
+##### 파일을 업로드할 때  Ajax Url 을 설정합니다.
 > 이미지
 ```javascript
 fileUploadURL: '/upload_file',
@@ -69,8 +69,32 @@ fileUploadParams: {
 
 > ## 파일 업로드 처리
 >> https://froala.com/wysiwyg-editor/docs/server/java/file-upload/ 참고
-##### 에디터를 사용하기 위해 #edit인 textarea 태그를 입력합니다.
+##### 파일 업로드 시 실행되는 url입니다.
 ```java
 // 에디터 선언
 @WebServlet(name = "FileUploadServlet", urlPatterns = { "/upload_file" })
+@MultipartConfig
+public class FileUpload extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public FileUpload() {
+		super();
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+			
+			}
 ```
