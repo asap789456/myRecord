@@ -71,23 +71,15 @@ fileUploadParams: {
 >> https://froala.com/wysiwyg-editor/docs/server/java/file-upload/ 참고
 ##### 파일 업로드 시 실행되는 url입니다.
 ```java
-// 에디터 선언
 @WebServlet(name = "FileUploadServlet", urlPatterns = { "/upload_file" })
 @MultipartConfig
 public class FileUpload extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public FileUpload() {
 		super();
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
