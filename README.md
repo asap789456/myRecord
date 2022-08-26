@@ -227,6 +227,7 @@ public void startCurrencyRate() throws IOException {
 	}
 }
 ```
+
 #### https://finance.naver.com/marketindex/ url을 사용하여 데이터를 조회합니다.
 ##### 1. Jsoup 을 사용해서 해당 url 을 연결합니다.
 ##### 2. html 코드 중에 class 명이 'tbl_exchange today' 인 table 태그를 찾아 조회합니다.
@@ -252,7 +253,7 @@ service2.insertExRate(exVO2)
 ```
 
 #### 저장된 데이터를 확인할 수 있습니다.
-![image](https://user-images.githubusercontent.com/28374739/186810734-b5e1cd34-4bba-4fd8-b0f7-3e9188e58fac.png)
+![image](https://user-images.githubusercontent.com/28374739/186810948-725de47a-c1b1-446e-88ae-e7ebfc510109.png)
 
 
 
@@ -261,4 +262,66 @@ service2.insertExRate(exVO2)
 
 
 > ## 2. 파이썬
-##### 알림톡 템플릿을 신규 등록 & 관리할 수 있습니다.
+#### 나라 개수만큼 for문을 실행하여 데이터를 가져옵니다.
+```python
+for i in range(0, iLen): 
+    tempList = getRate(sCode[i][0], sCode[i][1], sUsdRate[1]) # 국가코드, 국가 영문명, 미환율
+
+    if f_isNull(tempList) == 1:
+	n = n+1 # 국가개수
+	tempList.append(today)# 오늘일자 추가
+	savaDataList.append(tuple(tempList))
+f_dbConnect(savaDataList, n)
+```
+
+#### https://finance.naver.com/marketindex/ url을 사용하여 데이터를 조회합니다.
+##### 1. BeautifulSoup 을 사용해서 해당 url 을 연결합니다.
+##### 2. html 코드 중에 class 명이 'tbl_exchange' 인 table 태그를 찾아 조회합니다.
+##### 3. table 안에 tr 태그의 개수만큼 for문을 실행합니다.
+```python
+# 환율 가져오기
+def getRate(sCode, sName, sRate):
+    try:
+        webpage = urlopen(url)
+        soup = BeautifulSoup(webpage, 'html.parser')  # 해당 url 태그를 가져옴
+        table = soup.select_one('.tbl_exchange')
+        contents = table.select('tbody > tr')
+	
+        for content in contents:
+		...
+```
+
+```python
+# db 연결
+def f_dbConnect(sData, i):
+    today = datetime.datetime.now().strftime("%Y%m%d")  # yyyymmdd
+    sChkData = []
+    # print(tuple(sData))
+    conn = pymssql.connect(**params)  # 서버 연결
+    if i >= 2:  # 해당 url에 데이터가 있으면 
+        try:
+            iCursor = conn.cursor()          #평균환율,현찰살때,현찰팔때,송금살때,송금팔때,화폐코드, 기준일자,등록일시,등록자,등록자명
+            isql = "INSERT INTO FAS..T_FA_RATM(EXCH_RT, CA01_RT, CA02_RT,SE01_RT, SE02_RT,  CURR_CD, RATM_DD, REGI_DT, REGI_ID,REGI_NM,REMK_NM)" \
+                   "VALUES (%s,%s,%s,%s,%s,%s,%s,GETDATE(),'F200033',N'김승철', N'1회차') "
+
+            iCursor.executemany(isql, tuple(sData))  # 다중 insert 할때
+            conn.commit()  # insert 실행
+            f_log("db 데이터 입력 성공")
+
+        except Exception as e:
+            f_log(str(e))
+
+    elif i < 2:  # 해당 url에 데이터가 없으면 오늘일자 기준으로 어제 환율을 가져와서 넣어준다
+        try:
+            iCursor = conn.cursor()              #일자, 화폐코드, 환율,   현찰살때,현찰팔때,송금살때,송금팔때, 등록일시,등록자,등록자명 
+            isql = "INSERT INTO FAS..T_FA_RATM (RATM_DD, CURR_CD, EXCH_RT, CA01_RT, CA02_RT,SE01_RT, SE02_RT,  REGI_DT,REGI_ID,REGI_NM,REMK_NM)" \
+            "SELECT %s, CURR_CD, EXCH_RT, CA01_RT, CA02_RT, SE01_RT, SE02_RT, GETDATE(),'F200033',N'김승철', CONCAT(RATM_DD, N' 의', REMK_NM) FROM FAS..T_FA_RATM WHERE RATM_DD = (SELECT MAX(RATM_DD) FROM FAS..T_FA_RATM) "
+            iCursor.execute(isql, today)
+            conn.commit()  # insert 실행
+            f_log("db 데이터 입력 성공")
+        except Exception as e:
+            f_log(str(e))
+
+    conn.close()  # 서버 종료
+```
+
