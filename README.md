@@ -93,7 +93,7 @@ public class FileUpload extends HttpServlet {
 String[] allowedExts = new String[] { "txt", "html", "pdf", "doc", ".octet-stream" };
 ```
 
-##### 파일 다운로드 시 실행되는 url입니다.
+##### 업로드 된 파일을 보여주는 url입니다.
 ```java
 @WebServlet("/files/*")
 public class FileServlet extends HttpServlet {
@@ -102,4 +102,8 @@ public class FileServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {}
+```
+##### 파일을 다운로드 형태로 보기 위해 ontentType을 설정합니다.
+```java
+response.setContentType("application/download;UTF-8");
 ```
