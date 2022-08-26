@@ -12,7 +12,7 @@
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/28374739/186798409-8284cc9b-05db-40a7-909b-4ebb14d47469.gif)
 
-> ## 에디터 화면
+> ## 1. 에디터 화면
 ##### 에디터를 사용하기 위해 #edit인 textarea 태그를 입력합니다.
 ```javascript
 // 에디터 선언
@@ -67,7 +67,7 @@ fileUploadParams: {
 
 
 
-> ## 파일 업로드 처리
+> ## 2. 파일 업로드 처리
 >> https://froala.com/wysiwyg-editor/docs/server/java/file-upload/ 참고
 ##### 파일 업로드 시 실행되는 url입니다.
 ```java
@@ -128,8 +128,8 @@ response.setContentType("application/download;UTF-8");
 
 
 
-> ## Api Store
-##### 알림톡 템플릿을 신규 등록 또는 관리할 수 있습니다.
+> ## 1. Api Store
+##### 알림톡 템플릿을 신규 등록 & 관리할 수 있습니다.
 ![image](https://user-images.githubusercontent.com/28374739/186803835-f5cc2c0a-4ef7-47cf-b48e-47693757ed0c.png)
 
 
@@ -137,3 +137,10 @@ response.setContentType("application/download;UTF-8");
 ![image](https://user-images.githubusercontent.com/28374739/186803935-c32d1712-85ce-4801-beb8-cad97087fd92.png)
 
 
+> ## 2. 알림톡 발송 처리
+##### 알림톡 발신번호 등록 & 인증을 합니다.
+```java
+```
+##### 알림톡을 발송합니다.
+```java
+```
