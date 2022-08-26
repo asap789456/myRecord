@@ -290,38 +290,15 @@ def getRate(sCode, sName, sRate):
         for content in contents:
 		...
 ```
-
+#### DB 에 데이터를 저장합니다.
 ```python
 # db 연결
 def f_dbConnect(sData, i):
-    today = datetime.datetime.now().strftime("%Y%m%d")  # yyyymmdd
-    sChkData = []
-    # print(tuple(sData))
     conn = pymssql.connect(**params)  # 서버 연결
-    if i >= 2:  # 해당 url에 데이터가 있으면 
-        try:
-            iCursor = conn.cursor()          #평균환율,현찰살때,현찰팔때,송금살때,송금팔때,화폐코드, 기준일자,등록일시,등록자,등록자명
-            isql = "INSERT INTO FAS..T_FA_RATM(EXCH_RT, CA01_RT, CA02_RT,SE01_RT, SE02_RT,  CURR_CD, RATM_DD, REGI_DT, REGI_ID,REGI_NM,REMK_NM)" \
-                   "VALUES (%s,%s,%s,%s,%s,%s,%s,GETDATE(),'F200033',N'김승철', N'1회차') "
-
-            iCursor.executemany(isql, tuple(sData))  # 다중 insert 할때
-            conn.commit()  # insert 실행
-            f_log("db 데이터 입력 성공")
-
-        except Exception as e:
-            f_log(str(e))
-
-    elif i < 2:  # 해당 url에 데이터가 없으면 오늘일자 기준으로 어제 환율을 가져와서 넣어준다
-        try:
-            iCursor = conn.cursor()              #일자, 화폐코드, 환율,   현찰살때,현찰팔때,송금살때,송금팔때, 등록일시,등록자,등록자명 
-            isql = "INSERT INTO FAS..T_FA_RATM (RATM_DD, CURR_CD, EXCH_RT, CA01_RT, CA02_RT,SE01_RT, SE02_RT,  REGI_DT,REGI_ID,REGI_NM,REMK_NM)" \
-            "SELECT %s, CURR_CD, EXCH_RT, CA01_RT, CA02_RT, SE01_RT, SE02_RT, GETDATE(),'F200033',N'김승철', CONCAT(RATM_DD, N' 의', REMK_NM) FROM FAS..T_FA_RATM WHERE RATM_DD = (SELECT MAX(RATM_DD) FROM FAS..T_FA_RATM) "
-            iCursor.execute(isql, today)
-            conn.commit()  # insert 실행
-            f_log("db 데이터 입력 성공")
-        except Exception as e:
-            f_log(str(e))
-
+    iCursor = conn.cursor()
+    isql = "INSERT INTO ..." # DB 저장
+    iCursor.execute(isql, today)
+    conn.commit()  # insert 실행
     conn.close()  # 서버 종료
 ```
 
