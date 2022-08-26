@@ -247,7 +247,7 @@ public String getCurrencyRate(String cc, String cn, String usdRate) { // cc : �
 }
 ```
 
-#### 데이터를 오브젝트에 담아서 DB에 저장합니다.
+#### 데이터를 오브젝트에 담아서 DB에 데이터를 저장합니다.
 ```java
 service2.insertExRate(exVO2)
 ```
