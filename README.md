@@ -160,7 +160,7 @@ public void response(@PathVariable("mycsnm") String mycsnm, @PathVariable("name"
 	String url = "http://api.apistore.co.kr/kko/1/msg/" + client_id; // client_id는 Api Store 아이디 입니다.
 }
 ```
-##### 알림톡 발송 후 처리코드를 결과로 받습니다.
+##### 알림톡 발송 후 처리결과에 따른 처리코드가 리턴됩니다.
 ```java
 JSONParser jsonParse = new JSONParser();
 JSONObject obj = (JSONObject) jsonParse.parse(response.getBody().toString());
