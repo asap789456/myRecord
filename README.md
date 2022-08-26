@@ -65,10 +65,12 @@ fileUploadParams: {
 }
 ```
 
-## 링크
-
-
 
 
 > ## 파일 업로드 처리
 >> https://froala.com/wysiwyg-editor/docs/server/java/file-upload/ 참고
+##### 에디터를 사용하기 위해 #edit인 textarea 태그를 입력합니다.
+```java
+// 에디터 선언
+@WebServlet(name = "FileUploadServlet", urlPatterns = { "/upload_file" })
+```
