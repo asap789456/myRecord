@@ -11,7 +11,7 @@
 >	> This is a second blockqute.
 >	>	> This is a third blockqute.
 
-### 에디터를 사용하기 위해 id가 edit인 textarea 태그를 입력합니다.
+##### 에디터를 사용하기 위해 id가 edit인 textarea 태그를 입력합니다.
 ```javascript
 // 에디터 선언
 <body>
@@ -22,7 +22,7 @@
 </body>
 
 ```
-### 사용할 버튼들을 설정합니다.
+##### 버튼들을 설정합니다.
 ```javascript
 <script>
   (function () {
