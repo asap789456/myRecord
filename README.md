@@ -204,7 +204,7 @@ if (result_code.equals("100")) {
 
 
 
-# 환율 데이터 크롤링
+# 네이버 금융 환율 데이터 크롤링
 
 - 개발환경
   - 언어
@@ -227,7 +227,7 @@ public void startCurrencyRate() throws IOException {
 	}
 }
 ```
-#### https://finance.naver.com/marketindex/ url을 사용합니다.
+#### https://finance.naver.com/marketindex/ url을 사용하여 데이터를 조회합니다.
 ##### 1. Jsoup 을 사용해서 해당 url 을 연결합니다.
 ##### 2. html 코드 중에 class 명이 'tbl_exchange today' 인 table 태그를 찾아 조회합니다.
 ##### 3. table 안에 tr 태그의 개수만큼 for문을 실행합니다.
@@ -250,8 +250,9 @@ public String getCurrencyRate(String cc, String cn, String usdRate) { // cc : �
 ```java
 service2.insertExRate(exVO2)
 ```
-![image](https://user-images.githubusercontent.com/28374739/186806409-c3a0a8c4-47ab-4841-9cb1-d1b3f1689761.png)
 
+#### 저장된 데이터를 확인할 수 있습니다.
+![image](https://user-images.githubusercontent.com/28374739/186810734-b5e1cd34-4bba-4fd8-b0f7-3e9188e58fac.png)
 
 
 
