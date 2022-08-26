@@ -219,8 +219,8 @@ if (result_code.equals("100")) {
 ```java
 @Scheduled(cron = "0 50 08 * * *") // 매일 8시 50분
 public void startCurrencyRate() throws IOException {
-	List<ExRateVO> countries = service2.getCurCdList(); // DB에서 나라 정보를 조회합니다.
-	for (ExRateVO coutry : countries) { // 나라별로 데이터를 가져옵니다.
+	List<ExRateVO> countries = service2.getCurCdList(); // DB에서 국가 정보를 조회합니다.
+	for (ExRateVO coutry : countries) { // 국가별로 데이터를 가져옵니다.
 		String cCode = coutry.getCur_cd();
 		String cName = coutry.getCur_nm();
 		getCurrencyRate(cCode, cName, usdRate);
@@ -233,7 +233,7 @@ public void startCurrencyRate() throws IOException {
 ##### 2. html 코드 중에 class 명이 'tbl_exchange today' 인 table 태그를 찾아 조회합니다.
 ##### 3. table 안에 tr 태그의 개수만큼 for문을 실행합니다.
 ```java
-public String getCurrencyRate(String cc, String cn, String usdRate) { // cc : 나라코드, cn : 나라명, usdRate : 미국환율
+public String getCurrencyRate(String cc, String cn, String usdRate) { // cc : 국가코드, cn : 국가명, usdRate : 미국환율
 	try {
 		doc = Jsoup.connect(URL).get();
 	} catch (IOException e) {
@@ -252,17 +252,10 @@ public String getCurrencyRate(String cc, String cn, String usdRate) { // cc : �
 service2.insertExRate(exVO2)
 ```
 
-#### 저장된 데이터를 확인할 수 있습니다.
-![image](https://user-images.githubusercontent.com/28374739/186810948-725de47a-c1b1-446e-88ae-e7ebfc510109.png)
-
-
-
-
-
 
 
 > ## 2. 파이썬
-#### 나라 개수만큼 for문을 실행하여 데이터를 가져옵니다.
+#### 국가 개수만큼 for문을 실행하여 데이터를 가져옵니다.
 ```python
 for i in range(0, iLen): 
     tempList = getRate(sCode[i][0], sCode[i][1], sUsdRate[1]) # 국가코드, 국가 영문명, 미환율
@@ -301,4 +294,8 @@ def f_dbConnect(sData, i):
     conn.commit()  # insert 실행
     conn.close()  # 서버 종료
 ```
+
+#### 저장된 데이터를 확인할 수 있습니다.
+![image](https://user-images.githubusercontent.com/28374739/186810948-725de47a-c1b1-446e-88ae-e7ebfc510109.png)
+
 
