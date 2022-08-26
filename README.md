@@ -1,5 +1,4 @@
 # Froala Editor
-
 - 개발환경
   - 언어
     - JavaScript, Java
@@ -22,7 +21,6 @@
 		</textarea>
 	</div>
 </body>
-
 ```
 #### 버튼들을 설정합니다.
 ```javascript
@@ -46,7 +44,6 @@
  })()
 </script>
 ```
-
 #### 파일을 업로드할 때  Ajax Url 을 설정합니다.
 > 이미지
 ```javascript
@@ -65,8 +62,7 @@ fileUploadParams: {
 }
 ```
 
-
-
+<br/>
 > ## 2. 파일 업로드 처리
 >> https://froala.com/wysiwyg-editor/docs/server/java/file-upload/ 참고
 #### 파일 업로드 시 실행되는 url입니다.
@@ -115,13 +111,8 @@ response.setContentType("application/download;UTF-8");
 
 
 
-
-
-
-
-
+<br/><br/><br/><br/><br/>
 # Api Store 를 이용한 카카오 알림톡 발송
-
 - 개발환경
   - 언어
     - Java
@@ -130,17 +121,15 @@ response.setContentType("application/download;UTF-8");
   - Tomcat 8.5
   - JDK 1.8
 
-
-
+<br/>
 > ## 1. Api Store
 #### 알림톡 템플릿을 신규 등록 & 관리할 수 있습니다.
 ![image](https://user-images.githubusercontent.com/28374739/186803835-f5cc2c0a-4ef7-47cf-b48e-47693757ed0c.png)
 
-
 #### 템플릿 내용을 설정하고 등록합니다.
 ![image](https://user-images.githubusercontent.com/28374739/186803935-c32d1712-85ce-4801-beb8-cad97087fd92.png)
 
-
+<br/>
 > ## 2. 알림톡 발송 처리
 #### 알림톡 발신번호 등록 & 인증을 합니다.
 ```java
@@ -152,8 +141,6 @@ public void tel(@PathVariable("tel") String tel, @PathVariable("type") String ty
 	...
 }
 ```
-
-
 #### 알림톡을 발송합니다.
 ```java
 // http://localhost:8080/kkomsg/mycsnm/name/name/odno/csnm/dam_nm/phoneNumber
@@ -201,11 +188,8 @@ if (result_code.equals("100")) {
 
 
 
-
-
-
+<br/><br/><br/><br/><br/>
 # 네이버 금융 환율 데이터 크롤링
-
 - 개발환경
   - 언어
     - Java, Python
@@ -214,6 +198,7 @@ if (result_code.equals("100")) {
   - Tomcat 8.5
   - JDK 1.8
 
+<br/>
 > ## 1. 자바
 #### 매일 8시 50분마다 데이터를 가져올 수 있도록 스케줄링을 설정합니다. 
 ```java
@@ -227,7 +212,6 @@ public void startCurrencyRate() throws IOException {
 	}
 }
 ```
-
 #### https://finance.naver.com/marketindex/ url을 사용하여 데이터를 조회합니다.
 ##### 1. Jsoup 을 사용해서 해당 url 을 연결합니다.
 ##### 2. html 코드 중에 class 명이 'tbl_exchange today' 인 table 태그를 찾아 조회합니다.
@@ -246,14 +230,12 @@ public String getCurrencyRate(String cc, String cn, String usdRate) { // cc : �
 	}
 }
 ```
-
 #### 데이터를 오브젝트에 담아서 DB에 데이터를 저장합니다.
 ```java
 service2.insertExRate(exVO2)
 ```
 
-
-
+<br/>
 > ## 2. 파이썬
 #### 국가 개수만큼 for문을 실행하여 데이터를 가져옵니다.
 ```python
@@ -266,7 +248,6 @@ for i in range(0, iLen):
 	savaDataList.append(tuple(tempList))
 f_dbConnect(savaDataList, n)
 ```
-
 #### https://finance.naver.com/marketindex/ url을 사용하여 데이터를 조회합니다.
 ##### 1. BeautifulSoup 을 사용해서 해당 url 을 연결합니다.
 ##### 2. html 코드 중에 class 명이 'tbl_exchange' 인 table 태그를 찾아 조회합니다.
@@ -301,19 +282,8 @@ def f_dbConnect(sData, i):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+<br/><br/><br/><br/><br/>
 # 아임포트를 이용한 결제 시스템
-
 - 개발환경
   - 언어
     - JavaScript, Java
@@ -376,6 +346,7 @@ IMP.request_pay({
 });
 ```
 
+<br/>
 > ## 2. 결제 처리
 #### 결제 정보를 조회하기 위해서 access token 을 발급받아야 합니다.
 ##### 1. https://api.iamport.kr/users/getToken 을 POST 방식으로 접근하여 access_token을 발급받습니다.
@@ -438,5 +409,3 @@ public String getToken() throws UnsupportedEncodingException {
 	return _token;
 }
 ```
-
-
