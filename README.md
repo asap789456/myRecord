@@ -86,7 +86,9 @@ public class FileUpload extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {}
+			throws ServletException, IOException {
+			...
+			}
 ```
 ##### 업로드를 허용할 확장자를 설정합니다.
 ```java
@@ -101,7 +103,9 @@ public class FileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) {}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+	...
+	}
 ```
 ##### 파일을 다운로드 형태로 보기 위해 ContentType을 설정합니다.
 ```java
@@ -120,7 +124,7 @@ response.setContentType("application/download;UTF-8");
 
 - 개발환경
   - 언어
-    - JavaScript, Java
+    - Java
   - 개발도구
     - Eclipse
   - Tomcat 8.5
@@ -145,6 +149,7 @@ response.setContentType("application/download;UTF-8");
 @ResponseBody
 public void tel(@PathVariable("tel") String tel, @PathVariable("type") String type, @PathVariable("pincode") String pincode) {
 	String url = "http://api.apistore.co.kr/kko/2/sendnumber/save/" + client_id; // client_id는 Api Store 아이디 입니다.
+	...
 }
 ```
 
@@ -158,6 +163,7 @@ public void response(@PathVariable("mycsnm") String mycsnm, @PathVariable("name"
 		   , @PathVariable("odno") String odno, @PathVariable("csnm") String csnm, @PathVariable("dam_nm") String dam_nm
 		   , @PathVariable("phoneNumber") String phone_number) {
 	String url = "http://api.apistore.co.kr/kko/1/msg/" + client_id; // client_id는 Api Store 아이디 입니다.
+	...
 }
 ```
 ##### 알림톡 발송 후 처리결과에 따른 처리코드가 리턴됩니다.
@@ -188,3 +194,70 @@ if (result_code.equals("100")) {
 	result = "프로파일이 존재하지 않음";
 }
 ```
+
+
+
+
+
+
+
+
+
+
+# 환율 데이터 크롤링
+
+- 개발환경
+  - 언어
+    - Java, Python
+  - 개발도구
+    - Eclipse, PyCharm
+  - Tomcat 8.5
+  - JDK 1.8
+
+> ## 1. 자바
+##### 매일 8시 50분마다 데이터를 가져올 수 있도록 스케줄링을 설정합니다. 
+```java
+@Scheduled(cron = "0 50 08 * * *") // 매일 8시 50분
+public void startCurrencyRate() throws IOException {
+	List<ExRateVO> countries = service2.getCurCdList(); // DB에서 나라 정보를 조회합니다.
+	for (ExRateVO coutry : countries) { // 나라별로 데이터를 가져옵니다.
+		String cCode = coutry.getCur_cd();
+		String cName = coutry.getCur_nm();
+		getCurrencyRate(cCode, cName, usdRate);
+	}
+}
+```
+##### https://finance.naver.com/marketindex/ url을 사용합니다.
+> Jsoup 을 사용해서 해당 url 을 연결합니다.
+> html 코드 중에 class 명이 'tbl_exchange today' 인 table 태그를 찾아 조회합니다.
+> table 안에 tr 태그의 개수만큼 for문을 실행합니다.
+```java
+public String getCurrencyRate(String cc, String cn, String usdRate) { // cc : 나라코드, cn : 나라명, usdRate : 미국환율
+	try {
+		doc = Jsoup.connect(URL).get();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	
+	Elements elem = doc.select("table[class=\"tbl_exchange today\"]");
+	for (Element e1 : elem.select("tr")) {
+	...
+	}
+}
+```
+
+
+```java
+```
+
+![image](https://user-images.githubusercontent.com/28374739/186806409-c3a0a8c4-47ab-4841-9cb1-d1b3f1689761.png)
+
+
+
+
+
+
+
+
+> ## 2. 파이썬
+##### 알림톡 템플릿을 신규 등록 & 관리할 수 있습니다.
