@@ -192,7 +192,7 @@ if (result_code.equals("100")) {
   - JDK 1.8
 
 <br></br>
-> ## 1. 자바
+> ## 1. 자바구현
 #### 매일 8시 50분마다 데이터를 가져올 수 있도록 스케줄링을 설정합니다. 
 ```java
 @Scheduled(cron = "0 50 08 * * *") // 매일 8시 50분
@@ -229,7 +229,7 @@ service2.insertExRate(exVO2)
 ```
 
 <br></br>
-> ## 2. 파이썬
+> ## 2. 파이썬구현
 #### 국가 개수만큼 for문을 실행하여 데이터를 가져옵니다.
 ```python
 for i in range(0, iLen): 
