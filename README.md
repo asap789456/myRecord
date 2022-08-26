@@ -47,7 +47,24 @@
 </script>
 ```
 
-##### 이미지 업로드와 파일 업로드 Ajax Url 을 설정합니다.  
+##### 파일을 첨부할 때  Ajax Url 을 설정합니다.
+> 파일
+```javascript
+fileUploadURL: '/upload_file',
+fileUploadParams: {
+	id: 'my_editor',
+	변수:'${변수}'
+}
+```
+> 이미지
+```javascript
+fileUploadURL: '/upload_image',
+fileUploadParams: {
+	id: 'my_editor',
+	변수:'${변수}'
+}
+```
+
 
 
 
