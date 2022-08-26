@@ -1,4 +1,5 @@
-# Froala Editor
+# ★ Froala Editor
+##    -  froala 에서 제공하는 에디터를 자바스크립트로 구현하였습니다.
 - 개발환경
   - 언어
     - JavaScript, Java
@@ -110,7 +111,8 @@ response.setContentType("application/download;UTF-8");
 ```
 <br></br><br></br><br></br><br></br><br></br>
 
-# Api Store 를 이용한 카카오 알림톡 발송
+# ★ Api Store 를 이용한 카카오 알림톡 발송
+##    -  Api Store에서 제공하는 api를 이용하여 카카오 알림톡 발송을 구현하였습니다.
 - 개발환경
   - 언어
     - Java
@@ -182,7 +184,8 @@ if (result_code.equals("100")) {
 
 <br></br><br></br><br></br><br></br><br></br>
 
-# 네이버 금융 환율 데이터 크롤링
+# ★ 네이버 금융 환율 데이터 크롤링
+##    -  자바와 파이썬을 각각 이용해서 환율 테이터를 가져오는 작업을 구현하였습니다.
 - 개발환경
   - 언어
     - Java, Python
@@ -277,7 +280,8 @@ def f_dbConnect(sData, i):
 
 
 <br></br><br></br><br></br><br></br><br></br>
-# 아임포트를 이용한 결제 시스템
+# ★ 아임포트를 이용한 결제 시스템
+##    -  아임포트에서 제공하는 api를 이용하여 결제시스템을 구현하였습니다.
 - 개발환경
   - 언어
     - JavaScript, Java
