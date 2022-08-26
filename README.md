@@ -140,7 +140,21 @@ response.setContentType("application/download;UTF-8");
 > ## 2. 알림톡 발송 처리
 ##### 알림톡 발신번호 등록 & 인증을 합니다.
 ```java
+// http://localhost:8080/kkotel/발신번호/인증방법/
+@RequestMapping(value = "/kkotel/{tel}/{type}/{pincode}", method = RequestMethod.GET)
+@ResponseBody
+public void tel(@PathVariable("tel") String tel, @PathVariable("type") String type, @PathVariable("pincode") String pincode) {
+	String url = "http://api.apistore.co.kr/kko/2/sendnumber/save/" + client_id; // client_id는 Api Store 아이디 입니다.
+}
 ```
 ##### 알림톡을 발송합니다.
 ```java
+// http://localhost:8080/kkomsg/mycsnm/name/name/odno/csnm/dam_nm/phoneNumber
+@RequestMapping(value = "/kkomsg/{mycsnm}/{name}/{msg}/{odno}/{csnm}/{dam_nm}/{phoneNumber}", method = RequestMethod.GET)
+@ResponseBody
+public void response(@PathVariable("mycsnm") String mycsnm, @PathVariable("name") String name, @PathVariable("msg") String msg
+		   , @PathVariable("odno") String odno, @PathVariable("csnm") String csnm, @PathVariable("dam_nm") String dam_nm
+		   , @PathVariable("phoneNumber") String phone_number) {
+	String url = "http://api.apistore.co.kr/kko/1/msg/" + client_id; // client_id는 Api Store 아이디 입니다.
+}
 ```
