@@ -62,7 +62,8 @@ fileUploadParams: {
 }
 ```
 
-<br/>
+<br></br>
+
 > ## 2. 파일 업로드 처리
 >> https://froala.com/wysiwyg-editor/docs/server/java/file-upload/ 참고
 #### 파일 업로드 시 실행되는 url입니다.
@@ -107,11 +108,8 @@ public class FileServlet extends HttpServlet {
 ```java
 response.setContentType("application/download;UTF-8");
 ```
+<br></br><br></br><br></br><br></br><br></br>
 
-
-
-
-<br/><br/><br/><br/><br/>
 # Api Store 를 이용한 카카오 알림톡 발송
 - 개발환경
   - 언어
@@ -121,7 +119,7 @@ response.setContentType("application/download;UTF-8");
   - Tomcat 8.5
   - JDK 1.8
 
-<br/>
+<br></br>
 > ## 1. Api Store
 #### 알림톡 템플릿을 신규 등록 & 관리할 수 있습니다.
 ![image](https://user-images.githubusercontent.com/28374739/186803835-f5cc2c0a-4ef7-47cf-b48e-47693757ed0c.png)
@@ -129,7 +127,7 @@ response.setContentType("application/download;UTF-8");
 #### 템플릿 내용을 설정하고 등록합니다.
 ![image](https://user-images.githubusercontent.com/28374739/186803935-c32d1712-85ce-4801-beb8-cad97087fd92.png)
 
-<br/>
+<br></br>
 > ## 2. 알림톡 발송 처리
 #### 알림톡 발신번호 등록 & 인증을 합니다.
 ```java
@@ -182,13 +180,8 @@ if (result_code.equals("100")) {
 }
 ```
 
+<br></br><br></br><br></br><br></br><br></br>
 
-
-
-
-
-
-<br/><br/><br/><br/><br/>
 # 네이버 금융 환율 데이터 크롤링
 - 개발환경
   - 언어
@@ -198,7 +191,7 @@ if (result_code.equals("100")) {
   - Tomcat 8.5
   - JDK 1.8
 
-<br/>
+<br></br>
 > ## 1. 자바
 #### 매일 8시 50분마다 데이터를 가져올 수 있도록 스케줄링을 설정합니다. 
 ```java
@@ -235,7 +228,7 @@ public String getCurrencyRate(String cc, String cn, String usdRate) { // cc : �
 service2.insertExRate(exVO2)
 ```
 
-<br/>
+<br></br>
 > ## 2. 파이썬
 #### 국가 개수만큼 for문을 실행하여 데이터를 가져옵니다.
 ```python
@@ -282,7 +275,8 @@ def f_dbConnect(sData, i):
 
 
 
-<br/><br/><br/><br/><br/>
+
+<br></br><br></br><br></br><br></br><br></br>
 # 아임포트를 이용한 결제 시스템
 - 개발환경
   - 언어
@@ -346,7 +340,7 @@ IMP.request_pay({
 });
 ```
 
-<br/>
+<br></br>
 > ## 2. 결제 처리
 #### 결제 정보를 조회하기 위해서 access token 을 발급받아야 합니다.
 ##### 1. https://api.iamport.kr/users/getToken 을 POST 방식으로 접근하여 access_token을 발급받습니다.
@@ -409,3 +403,4 @@ public String getToken() throws UnsupportedEncodingException {
 	return _token;
 }
 ```
+
