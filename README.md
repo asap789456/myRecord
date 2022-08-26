@@ -1,12 +1,12 @@
 # Froala Editor
 
-
 - 개발환경
   - 언어
     - JavaScript, Java
   - 개발도구
     - Eclipse
-  - Tomcat 8.5  
+  - Tomcat 8.5
+  - JDK 1.8
 
 
 
