@@ -147,6 +147,8 @@ public void tel(@PathVariable("tel") String tel, @PathVariable("type") String ty
 	String url = "http://api.apistore.co.kr/kko/2/sendnumber/save/" + client_id; // client_id는 Api Store 아이디 입니다.
 }
 ```
+
+
 ##### 알림톡을 발송합니다.
 ```java
 // http://localhost:8080/kkomsg/mycsnm/name/name/odno/csnm/dam_nm/phoneNumber
@@ -156,5 +158,33 @@ public void response(@PathVariable("mycsnm") String mycsnm, @PathVariable("name"
 		   , @PathVariable("odno") String odno, @PathVariable("csnm") String csnm, @PathVariable("dam_nm") String dam_nm
 		   , @PathVariable("phoneNumber") String phone_number) {
 	String url = "http://api.apistore.co.kr/kko/1/msg/" + client_id; // client_id는 Api Store 아이디 입니다.
+}
+```
+##### 알림톡 발송 후 처리코드를 결과로 받습니다.
+```java
+JSONParser jsonParse = new JSONParser();
+JSONObject obj = (JSONObject) jsonParse.parse(response.getBody().toString());
+Object result_code = obj.get("result_code");
+Object cmid = obj.get("cmid");
+
+String result = "";
+if (result_code.equals("100")) {
+	result = "User Error";
+} else if (result_code.equals("200")) {
+	result = "성공";
+} else if(result_code.equals("300")) {
+	result = "파라메터 에러";
+} else if(result_code.equals("400")) {
+	result = "알수없는 에러";
+} else if(result_code.equals("500")) {
+	result = "발신번호 사전 등록제에 의한 미등록 차단(4. 발신번호 인증/등록 기능 필수)";
+} else if(result_code.equals("600")) {
+	result = "충전요금 부족";
+} else if(result_code.equals("700")) {
+	result = "템플릿코드 사전 승인제에 의한 미승인 차단";
+} else if(result_code.equals("800")) {
+	result = "템플릿코드 에러";
+} else if(result_code.equals("900")) {
+	result = "프로파일이 존재하지 않음";
 }
 ```
